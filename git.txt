@@ -50,5 +50,7 @@ git pull
 git branch
 git branch newbranch
 git checkout newbranch
+git log --oneline -2
+=============
 
 
