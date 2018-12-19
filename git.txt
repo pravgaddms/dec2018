@@ -52,5 +52,5 @@ git branch newbranch
 git checkout newbranch
 git log --oneline -2
 =============
-
+New branch
 
