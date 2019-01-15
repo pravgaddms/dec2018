@@ -1,0 +1,91 @@
+
+GITHUB and BigBucket
+initial.md (mark down)
+Git is created by Linus Torvald
+Git is a Distributed Version Control System.
+Git is famous for project collaboration
+More than 1 person can work on project at the same time
+
+git config --global user.name "backup"
+git config --global user.email backup@gmail.com
+git config --global push.default "simple"
+git config --list
+
+mkdir testdir
+cd testdir
+
+BARE REPOSITRY..only for sharing purpose
+NON BARE REPOSITRY: used for shared and also for modification
+
+git init --bare  ---> Created an empty bare type repository
+git clone <remote><local>
+git clone testdir workspace01
+cd ../workspace01
+echo "first file" >> 1.java
+
+Git Life Cycle: git status, untracked file..
+
+git add 1.java
+git commit -m "first time"
+
+echo "second line" >> 1.java
+git add 1.java
+git status
+git commit -m "second time"
+
+git log
+git log --oneline
+git log --oneline -3 
+
+git push
+
+===================
+git clone testdir workspace02
+
+cd workspace02
+git status
+git log
+echo "first line" >> 3.java
+git add .
+git commit -m "firt commit from workspace02"
+git push
+git pull
+
+============
+
+git branch
+git branch newbranch
+git checkout newbranch
+
+==========
+
+git push -u --all
+git branch -a (To see the branches obtained from the remote)
+git cherry-pick <commitid> [cherry picking in git means to choose a commit from one branch and apply it onto another. only 7 characters, Need to run from destination branch(Master)]
+
+git merge <source branch> destination branch
+git merge newbranch master
+git status
+git add .
+git commit -m "merge files"
+git status
+git log 
+git log --online --grep "string"
+git log -3
+
+touch .gitignore
+touch 1.class
+touch 2.class
+echo "1.class" > .gitignore
+git status
+to put all extensions (vi .gitignore, *.class)
+
+
+
+Ignoring files:
+.gitignore
+
+
+
+
+

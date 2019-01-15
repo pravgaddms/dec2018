@@ -1,0 +1,38 @@
+Thin Provisioning -->guarentee=none
+can overcommit
+-----------------
+Thick provisioning--is default-->guarentee=volume
+----------------
+dedublication--storage efficiency ++Block level duplication++block size is 4K ==> Enabled on volume level==> Can reduce consumpation around 20%
+background process-->no impact to production and performance
+----------------------
+Compression: on volume level need to enable. compression true is parameter--> up to 3% compression ==> some owerwrite in restores.
+In line complression: when data is coming
+post process compression: during idle time.
+-------------------
+Flex clone volume clones==> By using snapshots,on volumes, dont occupy more space, quick==> Not always syncing
+Cloning--> Split clone
+-----------------
+Quotas--> limit resource use, Track resource use, notify users of high resource use, /etc/quotas
+each plicy will quota rules
+1 quota policy can be active
+---------
+Vol auto size:
+off--> volume wil lnot grow
+Grow-->will grow till volume reaches threshold
+Grow_shrink--> will automatically grow or shrink
+vol autosize vol1
+--------------------------
+Snapshot auto delete-->snap autodelete vol1 on
+----------
+Data protection methods: copies, mirror, tape backups, restores
+no load sharing in 7 mode.
+----------------
+snapshot is only readonly image,  fast recovery of files.
+
+create snapshot[manual, schedule or managment backup tools, restore through nas clint(windows and unix), Restore through snaprestore[entire volume or individual file, licence require]
+----------------------
+snapreserver default snapshotreserve is 5%
+
+
+

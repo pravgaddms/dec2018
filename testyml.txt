@@ -1,0 +1,170 @@
+=========
+yum list installed | grep httpd
+==============
+
+---
+- hosts: demo
+  become: yes
+  connection: ssh
+  vars_files:
+    - vars.yml
+  tasks:
+     - name: Install http package
+       yum: pkg='{{ pkgname}}'  state=absent
+
+     - name: start service
+       service: name='{{ pkgname}}' state=started
+======================
+   
+cat vars.yml
+pkgname: httpd
+==============
+---
+- hosts: demo
+  become: yes
+  connection: ssh
+  vars:
+     pkgname: httpd
+  tasks:
+     - name: Install http package
+       yum: pkg='{{ pkgname}}'  state=installed
+
+     - name: start service
+       service: name='{{ pkgname}}' state=started
+==============================
+
+---
+- hosts: demo
+  become: yes
+  connection: ssh
+  vars_prompt:
+    - name: pkgname
+      prompt: Please enter the package name
+  tasks:
+     - name: Install http package
+       yum: pkg='{{ pkgname}}'  state=installed
+
+     - name: start service
+       service: name='{{ pkgname}}' state=started
+====================================================
+---
+- hosts: demo
+  become : yes
+  connection: ssh
+  tasks:
+    - name: Installs httpd web server
+      yum: pkg=httpd state=present update_cache=true
+      notify:
+        - start httpd
+
+  handlers:
+    - name: start httpd
+      service: name=httpd state=restarted
+===========================================
+
+---
+- hosts: demo
+  become: yes
+  tasks:
+  - name: Ensure HTTPD is installed
+    yum: name=httpd state=present
+    register: output
+
+  - name: Created Directory
+    file: path=/var/www/html/ansible state=directory
+
+  - name: Ensure Apache is running
+    service: name=httpd enabled=yes state=started
+================================================
+---
+- hosts: all
+  become: yes
+  gather_facts: no
+  tasks:
+   - name: date/time stamp of playbook start 
+     raw: date > /tmp/playbook_start.log
+   - name: Install the apache web server
+     yum: pkg=httpd state=latest
+     notify: restart httpd
+   - name: install client software of telnet
+     yum: pkg=telnet state=latest
+   - name: Log all package installed
+     raw: yum list installed |grep httpd > /tmp/packages_installed.log
+   - name: Date and time End time
+     raw: date > /tmp/playbook_end.log
+
+  handlers:
+   - name: restart httpd
+     service: name=httpd state=restarted
+================================
+---
+- hosts: demo
+  become_user: yes
+  gather_facts: no
+  tasks:
+   - name: Install the apache web server
+     yum: pkg=httpd state=latest
+	 async: 300
+	 poll: 3
+	 notify: restart httpd
+  handlers:
+   - name: restart httpd
+     service: name=httpd state=restarted
+==============================================
+
+---
+- hosts: demo
+  become: yes
+  connection: ssh
+  tasks:
+    - name: Adding new users
+      user: name={{ item }} state=present
+      with_items:
+        - user1
+        - user2
+        - user3
+============================
+Installation on Amazon AMI
+sudo yum-config-manager --enable epel
+yum install ansible
+
+[ec2-user@ip-172-31-82-178 ~]$ ansible --version
+ansible 2.6.4
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = [u'/home/ec2-user/.ansible/plugins/modules', u'/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python2.6/site-packages/ansible
+  executable location = /usr/bin/ansible
+  python version = 2.6.9 (unknown, Nov  2 2017, 19:21:21) [GCC 4.8.5 20150623 (Red Hat 4.8.5-11)]
+
+adduser ansible
+passwd ansible
+visudo
+ ==> ansible ALL=(ALL) NOPASSWD: ALL
+su - ansible
+sudo yum update ..testing
+ssh-keygen
+
+sudo vi  /etc/ssh/sshd_config===>PasswordAuthentication yes(Make this changes in the file)
+[ansible@ip-172-31-82-178 ~]$ sudo service sshd restart
+Stopping sshd:                                             [  OK  ]
+Starting sshd: 
+
+copyt the sshkeys to all the nodes.
+ssh-copy-id ansible@<machine name> 
+ssh-copy-id localhost
+
+=================
+---
+- hosts: all
+  become: yes
+  connection: ssh
+  tasks:
+    - command: echo {{item}}
+      with_items: [0, 2, 4, 8, 10]
+      when: item > 5
+=====================
+
+
+
+
+	   

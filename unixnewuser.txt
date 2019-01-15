@@ -1,0 +1,36 @@
+
+cd /opt
+wget http://www-eu.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz
+
+
+
+sudo tar xzf apache-maven-3.5.4-bin.tar.gz
+sudo ln -s apache-maven-3.5.4 maven
+
+
+sudo vi /etc/profile.d/maven.sh
+
+
+export M2_HOME=/opt/maven
+export PATH=${M2_HOME}/bin:${PATH}
+
+
+Now load the environment variables in current shell using following command.
+
+source /etc/profile.d/maven.sh
+
+
+--------------------------------------------
+
+
+
+root@ubuntu:~# cd /usr/lib/jvm/java-8-openjdk-amd64/jre
+root@ubuntu:/usr/lib/jvm/java-8-openjdk-amd64/jre# ll
+total 176
+drwxr-xr-x 5 root root   4096 Dec 29 07:32 ./
+drwxr-xr-x 7 root root   4096 Dec 29 07:32 ../
+-rw-r--r-- 1 root root   1522 Nov 20 15:50 ASSEMBLY_EXCEPTION
+drwxr-xr-x 2 root root   4096 Dec 29 07:32 bin/
+drwxr-xr-x 8 root root   4096 Dec 29 07:32 lib/
+drwxr-xr-x 4 root root   4096 Dec 29 07:32 man/
+-rw-r--r-- 1 root root 155003 Nov 20 15:50 THIRD_PARTY_README

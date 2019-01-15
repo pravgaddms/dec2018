@@ -1,0 +1,21 @@
+vol create volumename aggregatename size
+vol size volumename +sizeingb
+snap reserve volumename 0
+vol offline volumename
+vol destroy volumename
+vol status volumename	
+vol status -l volumename
+vol create volumename -s none aggr1 size (thin provisions)
+
+fas01> version
+NetApp Release 8.2.3P3 7-Mode: Tue Apr 28 14:48:22 PDT 2015
+
+uptime
+cf status
+to create a file
+
+
+========================================
+
+
+

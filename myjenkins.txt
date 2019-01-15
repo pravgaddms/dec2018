@@ -1,0 +1,104 @@
+Q)What is jenkins?
+  it is a coontinuous integartion (CI) and continuous deployment (CD) tool.
+ 
+Q)what is cI and CD?
+ 
+ CI means integrate the developers code. CD means deliver or deploy the code into the different envirnoment (QA,pre-production,production).
+
+- It is a java based application.
+- it will help to automate the process of code integraton,code build,code delivery.
+- it is a opensource tool like hudson/bamboo/teamcity.
+- jenkins has original name as hudson.
+
+- Jenkins is the core part of the devops.
+- jenkins will connect to the scm,qa,tomcat,production,etc. to interact with these system. 
+- it is interacted with those systems with the plugins.
+- it is plugin based tool.
+- nearly 1000+ plugins jenkins will support.
+
+Q)important section of jenkins?
+ 
+ - Plugin management.
+ - global tool management.
+ - job management.
+ - jenkins dashboard.
+ - user management.
+ - security management.
+ - slave connection.
+
+Q)Role of Devops Engineer (or) Build and Release Engineer?
+  
+ - Installation and configuration.
+ - plugin management.
+ - user management.
+ - security management.
+ - global tool management.
+ - creating jobs.
+ - monitoring jobs.
+ - jobs pipeline
+ - integrating different tools.
+ - taking jenkins backup.
+
+NOTE: in jenkins server git should be installed.
+--------------------------------------------------
+Jenkins install and configure:
+-----------------------------
+ 1. using yum packages.
+ 2. using docker image.
+ 3. using jenkins.war.
+ 4. using tomcat.
+
+Pre-requisites:
+---------------
+- java 1.8.0 --- yum -y install java-1.8.0-openjdk
+- javac 1.8.0 --- yum -y install java-1.8.0-opnjdk-devel
+
+Steps to install:
+-----------------
+ 1.
+ - set up the repositories.
+ - install jenkins (yum -y install jenkins)
+ 2.
+ - set up docker environment
+ - download jenkins image.
+ - start the container.
+ 3.
+ - download jenkins.war LTS file from offical site
+ - start jaenkins.war (java -jar jenkins.war)
+ 4.
+ - download tomcat 7
+ - download jenkins.war
+ - copy jenkins.war file into the webapps folder of the tomcat (/opt/apache-tomcat-7-xx/webapps/)
+ - start the tomcat. (./startup.sh)
+
+Configuration:
+-------------
+1)unlock the jenkins use admin password
+
+ - cat /home/ramki/.jenkins/secrets/AdminPasword
+
+2) install the required plugins.
+3)setup the user and password.
+4)login to the dashboard using username and password.
+
+*************************************
+Plugin Management:
+-----------------
+Q)what is plugin ?
+  plugin is a additional software.it will help to interact with the other systems.
+
+ under plugin mangement we can install,update,remove the plugins.
+
+Manage jenkins--manage plugins
+************************************
+
+Global tool management:
+----------------------
+these are tools it will help develop the application like maven.
+
+difference between tool and plugin 
+ we can maintin multiple versions of tool.
+but we can maintain only single version of plugin.
+
+Manage jenkins----global tool configuration
+

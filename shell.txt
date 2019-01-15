@@ -1,0 +1,68 @@
+Shell scripting
+Regular expression:
+(.*)
+wild card
+? means 0 or 1 of previous element
+* means 0 or more of the previous element is required
++ means one or more the previous element
+. will match single character at the location
+
+Anchors==> ^(Beginning of string) and $(will match end of the string)
+Containers==>Miscellenous
+c.t
+car?t
+[chs]at==>cat,hat or sat
+123|321 matches 123 or 321
+
+Filtering and formatting commands:
+
+filter | grep
+awk==> programmatic filtering and string manipulation
+ps -ef|grep -v ==> means it will not show
+ls -l|awk '{print $1}'
+show only the permissions column from the long listing
+
+ls -l|awk '{print $9,"->",$3}'
+awk '$1 > 2000' invoices.txt
+grep nfs /etc/rc.conf
+grep ^client  /etc/rc.conf
+gpep client /etc/rc.conf
+
+grep ^[nN] /etc/rc.conf
+grep -v ^[nN] /etc/rc.conf
+
+
+Background Processes:
+service sshd status
+find / >/allfiles.txt & ===> means 1 with some process
+jobs
+jobs -r 1 ==> Remove
+cat /allfiles.txt ==> results
+
+
+Scripting overview
+unix command are placed in script file, can be scheduled using cron
+.sh is file extension. with r-x permssions to the script==> EG. chmod +rx scriptname.sh
+chmod 755 testsrcipt.sh==> ./testscript.sh
+
+
+env==> to display 
+setenv==> set with setenv 
+common example:
+$PATH
+$USER
+$HOME
+$Shell
+
+conditional==> IF(if else fi)
+Loop==> for-while-until
+
+
+
+
+
+
+	
+	
+	
+	--------------------

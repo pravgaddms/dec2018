@@ -1,0 +1,180 @@
+For RHEL (CENT OS)
+
+
+yum install -y yum-utils
+yum-config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+yum -y install docker-ce
+service start docker or systemctl start docker
+service status docker
+ps -ef|grep -i docker  ===> dockerd means docker daemon
+which docker ===> /bin/docker
+docker info ==> complete data about docker
+
+docker run -it ubuntu /bin/bash
+hostname
+echo $SHELL
+
+ps -ef
+docker run --name testcont -it ubuntu /bin/bash ==> you wil be inside container
+cd /tmp
+ls
+touch praveen.txt
+
+exit means came from container
+docker start containerid|name
+docker attach containerid|name
+ls -tlr /tmp/praveen.txt
+exit 
+docker start testcont
+docker attach testcont
+
+exit
+
+/bin/sh -c "while true; do echo hello world; sleep 1; done"
+
+docker run --name deamoncont -d ubuntu /bin/sh -c "while true; do echo hello world; sleep 1; done" 
+
+docker logs -f deamoncont
+docker ps ==> currently running one
+docker ps -a ==> all container started and stopped one's
+======================================
+docker stop containername
+docker ps 
+-a =lists all containers
+-q = container id only
+docker run --name ngnix -d -p 80:80 nginx
+
+
+docker inspect --format '{{ .NetworkSettings.IPAddress }}' 72218a64e68e ==to check container ip
+docker inspect --format '{{ .Config.Hostname }}' praveen
+docker inspect --format '{{ .State.Status }}' praveen
+
+docker stats containername  ==> Shows live output of top command
+docker events --filter ==> live output of containers
+docker events --filter event=attach
+docker events --filter event=attach --filter event=die
+
+docker events --since '1hr'
+
+docker run -it --name volcont -v /usr/data ubuntu ==> Creating volume on new container
+created /usr/data directory and now created dummy file
+
+docker run --name testcon -it --volumes-from volcont --privileged=true ubuntu /bin/bash  ==> Sharing between containers
+
+docker rename oldname newname
+docker port containername ==> Show port mapped
+=====PREPARING IMAGE++++++++++++++++++++
+docker run --name praveennew -it ubuntu
+apt update 
+apt install vim==Come out from containe
+docker  commit praveenew
+docker tag containerid <ubuntuvim>
+now run new container
+docker run -it --name pravennew2 praveenew
+
+docker run -it --name praveen1 --hostname "praveen" ubuntu /bin/bash
+docker run -it --name praveen2 --hostname "praveen" -m 10m --memory-swap 20m ubuntu /bin/bash
+docker inspect containerid
+docker pause containerid
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+
+
+
+=======================
+
+
+
+
+
+docker volume create myvol2
+docker volume ls
+docker volume inspect myvol2 [  "Mountpoint": "/var/lib/docker/volumes/myvol2/_data"]
+docker volume rm <volname>
+
+docker run -d --name devtest --mount source=myvol2,target=/app nginx:latest
+docker inspect devtest
+$ docker container stop devtest
+$ docker container rm devtest
+$ docker volume rm myvol2
+
+docker service create -d --name devtest-service --mount source=myvol2,target=/app nginx:latest
+
+docker run -d --name=nginxtest --mount source=nginx-vol,destination=/usr/share/nginx/html nginx:latest
+
+==================NETAPP PRATICE++++++++++++++++++++++
+
+docker version
+docker info
+docker pull httpd:2.2
+
+docker images
+docker run -d --name my_www httpd:2.2
+docker run -it --rm ubuntu ==> Will remove container once we come out from it
+
+docker ps
+docker logs my_www
+docker stop my_www
+docker rm my_www
+
+docker stop my_www && docker rm my_www
+docker volume create --name=myhttpd
+echo '<h1>This is persistent page!</h1>' > index.html
+
+==========================================
+
+
+
+docker run --name artifactorydemo -d -v /var/opt/jfrog/artifactory:/var/opt/jfrog/artifactory -p 8081:8081 docker.bintray.io/jfrog/artifactory-oss:latest
+
+start your registry
+docker run -d p 5000:5000 -restart=always -name registry registry:2
+tage image in the registry
+docker tag ubuntu localhost:5000/Ubuntu
+
+=======================DOCKER SWAM==========
+
+docker swarm init
+docker swarm join --token SWMTKN-1-63l8r028jn9ijb1ti3bs7wcd6mc7c7fef7pubwjdxwnar2ed69-7i8y0jyyc8rm0ecsnozwsn5u0 172.31.89.139:2377 ==< run this on other Docekr node
+docker swarm leave --force ==> Swarm node leaves from the cluster
+docker node promote <name> ==> Becomes Reachable..
+docker node ls --> all machines it will show manager and clients
+
+
+docker service create --name "name" <options> <image>
+docker service create --name "mynginx" -p 80:80 ngnix
+docker service ls
+docker service ps <servicename>
+docker service scale <servicename>=3
+docker stop containerid ==> to test stop the container new container will start
+docker service ps mynginx
+---
+docker service update  --image http mynginx ==> New package will be replaced by httpd
+docker-compose.yml
+Need to Prepare docker stack
+
+==========DOCKER FILE+++++++++++++++
+
+Gitbucket image:
+ ----------------
+ - mkdir technicaladda
+ - cd technicaladda
+ - vi Dockerfile
+ From java:latest
+ MAINTAINER ramki info@google.com
+ LABEL env=prodution {label}
+ ENV apparea /data/app {environment variables}
+ Run mkdir -p $apparea  {while start the image this directory is created}
+ ADD ./gitbucket.war $apparea {add the file to this directory}
+ WORKDIR $apparea
+ CMD ["java","-jar","gitbucket.war"]  {run the gitbucket at the container start}
+ 
+ 
+after create the docker file build that file as image
+ - sudo docker build -t techmine/gitbucket:latest .
+
+To run that gitbucket image 
+ - sudo docker run -d -p 80:8080 techmine/gitbucket
+To login to the running container
+ - sudo docker exec -ti (container id) /bin/bash
+ ===================================================
