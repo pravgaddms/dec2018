@@ -1,0 +1,33 @@
+How I need to maintain the order in NACL(Network Access Control List) is it descending/ascending/no order?
+What will be the default value of the security group for the incoming  and outgoing traffic?
+what is the range of IP address available for this CIDR 10.0.0.0/24?
+When I call s3 bucket from EC2 instance the call will happen via publc internet or private with call within AWS?
+ I have 2 VPCs and one EC2 instance in one VPC need to connect to Database which is present in another VPC. Can I implement the same ?
+what method I need to opt if I don't want AWS to change the Public IP address of the EC2 instance when it is restarted..
+what is the limit of elastic IPs? Is it account level or region level?
+When we restart an EC2 instance is public IP remains same or changes?
+Where we need to create the NAT gateway (in public subnet/ private subnet)?
+What type of subnet are created by AWS in default VPC?
+what is the range of IPv4 private IP address?
+
+What is the command for running containers.
+Write a Docker file and build image and run the container.
+How you will enter into running containers.
+Explain Jenkins complete CICD.
+Write jenkins declarative pipeline.
+What is trivi sonarq and Maven also how will integrate with jenkins. Explain me sonarQube reports details and and how you will inform to developer regarding the report result. 
+What terraform.
+Write terraform script to create s3 but in AwS.
+LINUX BASIC COMMAND.
+What is the Ansible why need to be used.
+What is the availability zone in Cloud and how to use.
+What is Isto/service mesh.
+Scenario based questions: client want to move their project from  onprem to Cloud platform. What will be your strategy.
+What is persistent volume. 
+What are services available in K8s is name and explain. 
+What is the secret file in K8s and how to Store those.
+Explain the Azure DNS and storage service.
+Tell me the some services name in AWS.
+What is helm why we need to be use and for what. Also them me so helm commands.
+Have you completed any POC..
+How your monitor your cluster. Also have you work on any monitoring tools.
